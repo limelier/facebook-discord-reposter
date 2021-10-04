@@ -1,4 +1,4 @@
-package model
+package me.limelier.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -9,12 +9,12 @@ import java.net.URL
  * [Facebook page webhook feed event](https://developers.facebook.com/docs/graph-api/webhooks/reference/page/#feed),
  * containing only what we need.
  */
-data class PartialFeedEvent(
+public data class PartialFeedEvent(
     val field: String, // relevant value: "feed"
     val value: Value,
 ) {
     @JsonIgnoreProperties(ignoreUnknown = true)
-    data class Value(
+    public data class Value(
         val verb: Verb,
         val post: PagePost?,
         val link: URL?, // attachment
@@ -25,7 +25,7 @@ data class PartialFeedEvent(
     )
 
     @JsonIgnoreProperties(ignoreUnknown = true)
-    data class PagePost(
+    public data class PagePost(
         @JsonProperty("is_published") val published: Boolean,
         @JsonProperty("permalink_url") val permalink: URL
     )

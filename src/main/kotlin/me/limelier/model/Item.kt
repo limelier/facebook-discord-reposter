@@ -1,6 +1,10 @@
-package model
+package me.limelier.model
 
-enum class Item {
+/**
+ * The item that a feed event is triggered by.
+ * @see PartialFeedEvent
+ */
+public enum class Item {
     ALBUM,
     ADDRESS,
     COMMENT,

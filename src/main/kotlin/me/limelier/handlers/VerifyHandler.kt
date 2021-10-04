@@ -1,13 +1,14 @@
-package handlers
+package me.limelier.handlers
 
 import io.javalin.http.Context
 import io.javalin.http.Handler
 import io.javalin.http.UnauthorizedResponse
-import mu.KotlinLogging
+import me.limelier.Config
+import org.apache.logging.log4j.kotlin.Logging
 
-private val logger = KotlinLogging.logger {}
+public class VerifyHandler : Handler {
+    private companion object : Logging
 
-class VerifyHandler : Handler {
     override fun handle(ctx: Context) {
         logger.info { "Received verify request from ${ctx.ip()}" }
         ctx.queryParamAsClass<String>("hub.type")

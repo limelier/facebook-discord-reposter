@@ -1,20 +1,20 @@
-package handlers
+package me.limelier.handlers
 
 import io.javalin.http.Context
 import io.javalin.http.Handler
-import model.PartialFeedEvent
-import model.Post
-import model.Verb
-import mu.KotlinLogging
-import sendPostToWebhook
+import me.limelier.model.PartialFeedEvent
+import me.limelier.model.Post
+import me.limelier.model.Verb
+import org.apache.logging.log4j.kotlin.Logging
+import me.limelier.sendPostToWebhook
 
-private val logger = KotlinLogging.logger {}
+public class EventHandler : Handler {
+    private companion object : Logging
 
-class EventHandler : Handler {
     override fun handle(ctx: Context) {
         val partialFeedEvent = ctx.bodyValidator<PartialFeedEvent>().get()
         val (field, value) = partialFeedEvent
-        logger.info { "Received $field event from ${ctx.ip()}" }
+        logger.info("Received $field event from ${ctx.ip()}")
         logger.debug { partialFeedEvent }
 
         if (field != "feed") {
@@ -27,7 +27,7 @@ class EventHandler : Handler {
         }
 
         val post = Post.fromEventValue(value)
-        logger.info { "Constructed post object: $post"}
+        logger.info { "Constructed post object: $post" }
 
         sendPostToWebhook(post)
     }

@@ -1,16 +1,16 @@
-package util
+package me.limelier.util
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import exceptions.RequestFailedException
-import mu.KotlinLogging
+import me.limelier.exceptions.RequestFailedException
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import java.io.IOException
+import org.apache.logging.log4j.kotlin.logger
+import org.apache.logging.log4j.kotlin.contextName
 import java.net.URL
 
-private val logger = KotlinLogging.logger {}
+private val logger = logger(contextName { })
 private val mapper = jacksonObjectMapper()
 private val client = OkHttpClient()
 private val json = "application/json; charset=utf-8".toMediaType()
@@ -24,7 +24,7 @@ private val json = "application/json; charset=utf-8".toMediaType()
  *
  * @throws RequestFailedException request failed after `attempts` attempts
  */
-fun post(url: URL, body: Any, attempts: Int) {
+public fun post(url: URL, body: Any, attempts: Int) {
     assert(attempts >= 1)
     val jsonBody = mapper.writeValueAsString(body)
     val request = Request.Builder()

@@ -3,12 +3,13 @@
     <Appenders>
         <Console name="ConsoleAppender" target="SYSTEM_ERR" follow="true">
             <PatternLayout
-                    pattern="%d{yy-MM-dd HH:mm:ss.SSS} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=green, TRACE=green} %style{%pid}{magenta} --- [%t] %style{%-10.40c{1.}}{cyan} : %m%n%ex"/>
+                    pattern="%d{yy-MM-dd HH:mm:ss.SSS} %highlight{${LOG_LEVEL_PATTERN:-%5p}}{FATAL=red blink, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue, TRACE=magenta} [%t] --- %style{%-10.40c{1.}}{cyan} : %m%n%ex"
+            />
         </Console>
     </Appenders>
     <Loggers>
-        <Logger name="me.limelier" level="debug"/>
-        <Root level="info">
+        <Logger name="me.limelier" level="TRACE"/>
+        <Root level="INFO">
             <AppenderRef ref="ConsoleAppender"/>
         </Root>
     </Loggers>

@@ -1,21 +1,24 @@
+package me.limelier
+
 import dev.kord.common.entity.DiscordEmbed
 import dev.kord.common.entity.optional.Optional
-import exceptions.RequestFailedException
-import model.DiscordReqBody
-import model.Post
-import mu.KotlinLogging
-import util.post
+import me.limelier.exceptions.RequestFailedException
+import me.limelier.model.DiscordReqBody
+import me.limelier.model.Post
+import org.apache.logging.log4j.kotlin.logger
+import org.apache.logging.log4j.kotlin.contextName
+import me.limelier.util.post
 
-private val logger = KotlinLogging.logger {}
+private val logger = logger(contextName { })
 
-fun sendPostToWebhook(post: Post) {
+public fun sendPostToWebhook(post: Post) {
     val reqBody = DiscordReqBody(
         content = post.message,
         embeds = listOfNotNull(post.link, post.photoUrl, post.videoUrl)
             .map { DiscordEmbed(url = Optional(it.toString())) }
     )
     try {
-        logger.info { "Sending post to Discord as object: $reqBody"}
+        logger.info { "Sending post to Discord as object: $reqBody" }
         post(Config.Discord.webhook, reqBody, Config.Discord.attempts)
     } catch (e: RequestFailedException) {
         logger.error(e) { "Failed to send request to Discord webhook" }

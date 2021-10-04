@@ -1,13 +1,13 @@
+package me.limelier
+
 import com.fasterxml.jackson.databind.MapperFeature
-import handlers.EventHandler
-import handlers.VerifyHandler
+import me.limelier.handlers.EventHandler
+import me.limelier.handlers.VerifyHandler
 import io.javalin.Javalin
 import io.javalin.plugin.json.JavalinJackson
-import mu.KotlinLogging
+import org.apache.logging.log4j.kotlin.logger
 
-private val logger = KotlinLogging.logger("test")
-
-fun main() {
+private fun main() {
     val app = Javalin.create { config ->
         config.jsonMapper(
             JavalinJackson(JavalinJackson.defaultMapper().enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS))
