@@ -1,7 +1,5 @@
 package handlers
 
-import io.javalin.core.validation.ValidationException
-import io.javalin.http.BadRequestResponse
 import io.javalin.http.Context
 import io.javalin.http.Handler
 import model.PartialFeedEvent
@@ -29,7 +27,7 @@ class EventHandler : Handler {
         }
 
         val post = Post.fromEventValue(value)
-        logger.info { "Constructed post object $post"}
+        logger.info { "Constructed post object: $post"}
 
         sendPostToWebhook(post)
     }

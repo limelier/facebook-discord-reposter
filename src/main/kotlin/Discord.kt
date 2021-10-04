@@ -15,6 +15,7 @@ fun sendPostToWebhook(post: Post) {
             .map { DiscordEmbed(url = Optional(it.toString())) }
     )
     try {
+        logger.info { "Sending post to Discord as object: $reqBody"}
         post(Config.Discord.webhook, reqBody, Config.Discord.attempts)
     } catch (e: RequestFailedException) {
         logger.error(e) { "Failed to send request to Discord webhook" }
