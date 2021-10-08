@@ -1,6 +1,7 @@
 package me.limelier
 
 import com.fasterxml.jackson.databind.MapperFeature
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.json.JsonMapper
 import io.javalin.Javalin
 import me.limelier.handlers.EventHandler
@@ -10,10 +11,9 @@ import io.javalin.plugin.json.JavalinJackson
 public fun makeApp(config: Config): Javalin = Javalin
     .create { cfg ->
         cfg.jsonMapper(JavalinJackson(
-            JsonMapper
-                .builder()
+            JavalinJackson
+                .defaultMapper()
                 .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
-                .build()
         ))
     }
     .get("/", VerifyHandler(config))
