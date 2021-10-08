@@ -6,7 +6,7 @@ import io.javalin.http.UnauthorizedResponse
 import me.limelier.Config
 import org.apache.logging.log4j.kotlin.Logging
 
-public class VerifyHandler : Handler {
+public class VerifyHandler(private val config: Config) : Handler {
     private companion object : Logging
 
     override fun handle(ctx: Context) {
@@ -17,7 +17,7 @@ public class VerifyHandler : Handler {
 
         val verifyToken = ctx.queryParamAsClass<String>("hub.verify_token").get()
 
-        if (verifyToken != Config.Facebook.verifyToken) throw UnauthorizedResponse()
+        if (verifyToken != config.facebook.verifyToken) throw UnauthorizedResponse()
 
         val challenge = ctx.queryParamAsClass<Int>("hub.challenge").get()
 

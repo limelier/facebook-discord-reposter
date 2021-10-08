@@ -13,9 +13,9 @@ dependencies {
     implementation(kotlin("stdlib", "1.5.31"))
 
     implementation("dev.kord:kord-core:0.8.0-M5")
-    implementation("io.javalin:javalin:4.0.1")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("io.javalin:javalin:4.1.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.2")
 
     // logging
     implementation("org.apache.logging.log4j:log4j-api-kotlin:1.1.0")
@@ -33,4 +33,8 @@ tasks.test {
 
 kotlin {
     explicitApi()
+}
+
+task("stage") {
+    dependsOn("build")
 }
