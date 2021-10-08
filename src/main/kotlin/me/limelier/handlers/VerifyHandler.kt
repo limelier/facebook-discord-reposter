@@ -11,8 +11,8 @@ public class VerifyHandler(private val config: Config) : Handler {
 
     override fun handle(ctx: Context) {
         logger.info { "Received verify request from ${ctx.ip()}" }
-        ctx.queryParamAsClass<String>("hub.type")
-            .check({ it == "subscribe" }, "hub.type has to be 'subscribe'")
+        ctx.queryParamAsClass<String>("hub.mode")
+            .check({ it == "subscribe" }, "hub.mode has to be 'subscribe'")
             .get()
 
         val verifyToken = ctx.queryParamAsClass<String>("hub.verify_token").get()

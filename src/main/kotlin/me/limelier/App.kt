@@ -1,8 +1,6 @@
 package me.limelier
 
 import com.fasterxml.jackson.databind.MapperFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.json.JsonMapper
 import io.javalin.Javalin
 import me.limelier.handlers.EventHandler
 import me.limelier.handlers.VerifyHandler
