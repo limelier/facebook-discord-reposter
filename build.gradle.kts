@@ -1,5 +1,12 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     kotlin("jvm") version "1.5.31"
+    id("com.github.johnrengelman.shadow") version "7.1.0"
+}
+
+kotlin {
+    explicitApi()
 }
 
 group = "me.limelier"
@@ -31,10 +38,16 @@ tasks.test {
     useJUnitPlatform()
 }
 
-kotlin {
-    explicitApi()
+tasks {
+    named<ShadowJar>("shadowJar") {
+        archiveBaseName.set(project.name)
+        mergeServiceFiles()
+        manifest {
+            attributes(mapOf("Main-Class" to "me.limelier.AppKt"))
+        }
+    }
 }
 
 task("stage") {
-    dependsOn("build")
+    dependsOn("shadowJar")
 }
