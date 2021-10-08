@@ -20,5 +20,6 @@ public fun makeApp(config: Config): Javalin = Javalin
     .post("/", EventHandler(config))
 
 private fun main() {
-    makeApp(Config()).start()
+    val config = Config()
+    makeApp(config).start(config.server.port)
 }
