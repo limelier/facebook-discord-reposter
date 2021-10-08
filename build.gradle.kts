@@ -38,13 +38,11 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks {
-    named<ShadowJar>("shadowJar") {
-        archiveBaseName.set(project.name)
-        mergeServiceFiles()
-        manifest {
-            attributes(mapOf("Main-Class" to "me.limelier.AppKt"))
-        }
+tasks.shadowJar {
+    archiveBaseName.set(project.name)
+    mergeServiceFiles()
+    manifest {
+        attributes(mapOf("Main-Class" to "me.limelier.AppKt"))
     }
 }
 
