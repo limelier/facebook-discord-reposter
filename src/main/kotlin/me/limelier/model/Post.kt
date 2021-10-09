@@ -11,7 +11,7 @@ public data class Post(
     val videoUrl: URL?,
 ) {
     public companion object {
-        public fun fromEventValue(value: PartialFeedEvent.Value): Post = with(value) {
+        public fun fromEventValue(value: FeedEvent.Change.Value): Post = with(value) {
             Post(post?.permalink, message, link, photo, video)
         }
     }

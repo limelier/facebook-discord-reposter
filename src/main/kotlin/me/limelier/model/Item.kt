@@ -2,7 +2,7 @@ package me.limelier.model
 
 /**
  * The item that a feed event is triggered by.
- * @see PartialFeedEvent
+ * @see FeedEvent
  */
 public enum class Item {
     ALBUM,

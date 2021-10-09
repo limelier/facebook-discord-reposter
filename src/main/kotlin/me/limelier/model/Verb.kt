@@ -2,7 +2,7 @@ package me.limelier.model
 
 /**
  * A verb describing what occurred on the item to trigger the feed event.
- * @see PartialFeedEvent
+ * @see FeedEvent
  */
 public enum class Verb {
     ADD,
